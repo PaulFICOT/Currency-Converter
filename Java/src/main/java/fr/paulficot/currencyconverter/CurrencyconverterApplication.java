@@ -3,6 +3,7 @@ package fr.paulficot.currencyconverter;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -17,8 +18,9 @@ public class CurrencyconverterApplication implements CommandLineRunner {
      * @param args args
      */
     public static void main(String[] args) {
-        SpringApplication
-                .run(CurrencyconverterApplication.class, args);
+        ApplicationContext appContext = SpringApplication.run(CurrencyconverterApplication.class, args);
+        System.out.println("Good bye !");
+        SpringApplication.exit(appContext);
     }
 
     /**
@@ -69,15 +71,16 @@ public class CurrencyconverterApplication implements CommandLineRunner {
      */
     public void mainMenu() {
        Scanner input = new Scanner(System.in);
+       int answer = 0;
 
-       while(true) {
+       while(answer != 4) {
            System.out.println(" .: Currency Converter :.");
            System.out.println("1 - Display all currencies");
            System.out.println("2 - Conversion examples");
            System.out.println("3 - Convert currencies");
            System.out.println("4 - Quit");
 
-           int answer = input.nextInt();
+           answer = input.nextInt();
            System.out.println("Answer : " + answer);
 
            switch (answer) {
@@ -107,12 +110,11 @@ public class CurrencyconverterApplication implements CommandLineRunner {
                    break;
                case 4 :
                    System.out.println(" .: Quit :. ");
-                   System.exit(0);
                    break;
                default:
                    System.out.println("Unkown value, try again");
                    System.out.println();
-                   mainMenu();
+                   this.mainMenu();
                    break;
            }
         }
