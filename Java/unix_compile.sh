@@ -1,5 +1,4 @@
 #/bin/bash
 #Install Maven project
-cd Java
 
-./mvnw clean install
+./mvnw clean install -DskipTests
